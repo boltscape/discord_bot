@@ -16,4 +16,4 @@ class MyClient(discord.Client):
             await message.channel.send('Hello {0.author.mention}'.format(message))
 
 client = MyClient()
-client.run('NzUzNDkyODMzMTY3NDc0Njk5.X1m-4g.TtZsI05ssQNgz7ROs4YZy72GgWQ')
+client.run('token')
