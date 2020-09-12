@@ -1,13 +1,14 @@
 from discord.ext.commands import Bot
+import os
 import requests
 
 BOT_PREFIX = '!'
-TOKEN = ${process.env.bot_token}
-post_url = 'https://panel.freemc.host/api/client/servers/'+${process.env.server_id}+'/power'
-get_url = 'https://panel.freemc.host/api/client/servers/'+${process.env.server_id}+'/utilization'
+TOKEN = os.environ['bot_token']
+post_url = 'https://panel.freemc.host/api/client/servers/'+ os.environ['server_id'] +'/power'
+get_url = 'https://panel.freemc.host/api/client/servers/'+ os.environ['server_id'] +'/utilization'
 header = {"Accept": "Application/vnd.pterodactyl.v1+json",
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + Bearer ${process.env.ptero_token}
+          "Authorization": "Bearer " + Bearer os.environ['ptero_token']
           }
 
 client = Bot(command_prefix=BOT_PREFIX)
@@ -50,7 +51,7 @@ async def serverstatus(ctx):
 
 @client.command(description="Show the server address", brief="Show server address", pass_context=True)
 async def address(ctx):
-    await ctx.send("Hey " + ctx.author.mention + ", use " + ${process.env.server_address} + " to connect to the server!")
+    await ctx.send("Hey " + ctx.author.mention + ", use " + os.environ['server_address'] + " to connect to the server!")
 
 
 client.run(TOKEN)
