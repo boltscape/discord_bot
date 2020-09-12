@@ -1,17 +1,13 @@
 from discord.ext.commands import Bot
-import json
 import requests
 
-with open('config.json') as config_file:
-    config = json.load(config_file)
-
 BOT_PREFIX = '!'
-TOKEN = config["bot_token"]
-post_url = 'https://panel.freemc.host/api/client/servers/'+config['server_id']+'/power'
-get_url = 'https://panel.freemc.host/api/client/servers/'+config['server_id']+'/utilization'
+TOKEN = ${process.env.bot_token}
+post_url = 'https://panel.freemc.host/api/client/servers/'+${process.env.server_id}+'/power'
+get_url = 'https://panel.freemc.host/api/client/servers/'+${process.env.server_id}+'/utilization'
 header = {"Accept": "Application/vnd.pterodactyl.v1+json",
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + config["account_api_key"]
+          "Authorization": "Bearer " + Bearer ${process.env.ptero_token}
           }
 
 client = Bot(command_prefix=BOT_PREFIX)
@@ -54,7 +50,7 @@ async def serverstatus(ctx):
 
 @client.command(description="Show the server address", brief="Show server address", pass_context=True)
 async def address(ctx):
-    await ctx.send("Hey " + ctx.author.mention + ", use " + config["server_address"] + " to connect to the server!")
+    await ctx.send("Hey " + ctx.author.mention + ", use " + ${process.env.server_address} + " to connect to the server!")
 
 
 client.run(TOKEN)
