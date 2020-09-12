@@ -1,6 +1,6 @@
-Server Bot for FreeMC Host
+Server Bot for Pterodactyl based hosts
 
-This bot will help you manage your FreeMC Host server.
+This bot will help you manage your Pterodactyl host servers.
 
 Setting up the bot
 
@@ -10,4 +10,5 @@ You will need to add 4 things to set up the bot for your needs:
 3. Your Account API Key (Again, found in the panel under Account API)
 4. You server address (Found on the FreeMC main site, not the panel, under My Servers)
 
-Copy and paste these 4 things in config.json and run it locally/find a place to host your bot.
+Add the Discord bot and Account API keys to environment variables and also add in your server ID and address at the designated places in the code,
+and you're gucci. 
