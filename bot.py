@@ -7,7 +7,7 @@ import os
 
 BOT_PREFIX = ('!')
 TOKEN = os.environ['BOT_TOKEN']
-srv_id = '61955f87'
+srv_id = os.environ['SERVER_ID']
 
 client = Bot(command_prefix=BOT_PREFIX)
 panel_client = PterodactylClient('https://panel.gamehosting.gg', os.environ['PTERO_TOKEN'])
@@ -36,6 +36,6 @@ async def serverstatus(ctx):
 
 @client.command(description="Show the server address", brief="Show server address", pass_context=True)
 async def address(ctx):
-    await ctx.send("Hey "+ ctx.author.mention + ", use de4.hostserver.cc:25766 to connect to the server!")
+    await ctx.send("Hey "+ ctx.author.mention + ", use " + os.environ['SERVER_ADDRESS'] + " to connect to the server!")
 
 client.run(TOKEN)
