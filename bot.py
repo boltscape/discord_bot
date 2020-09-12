@@ -8,7 +8,7 @@ post_url = 'https://panel.freemc.host/api/client/servers/'+ os.environ['SERVER_I
 get_url = 'https://panel.freemc.host/api/client/servers/'+ os.environ['SERVER_ID'] +'/utilization'
 header = {"Accept": "Application/vnd.pterodactyl.v1+json",
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + Bearer os.environ['PTERO_TOKEN']
+          "Authorization": "Bearer " + os.environ['PTERO_TOKEN']
           }
 
 client = Bot(command_prefix=BOT_PREFIX)
