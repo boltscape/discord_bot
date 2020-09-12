@@ -1,2 +1,2 @@
-discord.ext.commands.Bot
+discord
 requests
