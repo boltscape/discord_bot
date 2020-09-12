@@ -41,6 +41,7 @@ async def stopserver(ctx):
 async def serverstatus(ctx):
     response = requests.get(get_url, headers=header)
     res = response.json()
+    print(res)
     if res["attributes"]["state"] == "on":
         await ctx.send("Server is already on, " + ctx.author.mention + ", get on there!")
     elif res["attributes"]["state"] == "off":
