@@ -19,6 +19,7 @@ client = Bot(command_prefix=BOT_PREFIX)
 async def startserver(ctx):
     params = {"signal": "start"}
     response = requests.post(post_url, json=params, headers=header)
+    print(response.json())
     if response.status_code == 204:
         await ctx.send("Starting the server, " + ctx.author.mention + ", enjoy!")
     else:
@@ -30,6 +31,7 @@ async def startserver(ctx):
 async def stopserver(ctx):
     params = {"signal": "stop"}
     response = requests.post(post_url, json=params, headers=header)
+    print(response.json())
     if response.status_code == 204:
         await ctx.send("Stopping the server, " + ctx.author.mention + ", hope you had a great time!")
     else:
