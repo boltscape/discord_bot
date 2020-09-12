@@ -1,60 +1,41 @@
 from discord.ext.commands import Bot
-import os
+from pydactyl import PterodactylClient
+from discord import Game
 import requests
+import os
 
-BOT_PREFIX = '!'
+
+BOT_PREFIX = ('!')
 TOKEN = os.environ['BOT_TOKEN']
-post_url = 'https://panel.freemc.host/api/client/servers/'+ os.environ['SERVER_ID'] +'/power'
-get_url = 'https://panel.freemc.host/api/client/servers/'+ os.environ['SERVER_ID'] +'/utilization'
-header = {"Accept": "Application/vnd.pterodactyl.v1+json",
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + os.environ['PTERO_TOKEN']
-          }
+srv_id = '61955f87'
 
 client = Bot(command_prefix=BOT_PREFIX)
+panel_client = PterodactylClient('https://panel.gamehosting.gg', os.environ['PTERO_TOKEN'])
 
-
-@client.command(name="start", description="Starts Minecraft server", brief="Starts Minecraft server",
-                pass_context=True)
+@client.command(name="start", description="Starts Minecraft server", brief="Starts Minecraft server", pass_context=True)
 async def startserver(ctx):
-    params = {"signal": "start"}
-    response = requests.post(post_url, json=params, headers=header)
-    print(response.json())
+    response = panel_client.client.send_power_action(srv_id, 'start')
     if response.status_code == 204:
-        await ctx.send("Starting the server, " + ctx.author.mention + ", enjoy!")
-    else:
-        await ctx.send("Hmmmm. There seems to be an error, " + ctx.author.mention + ". Try again later?")
+        await ctx.send("Starting the server, "+ ctx.author.mention + ", enjoy!")
 
-
-@client.command(name="stop", description="Stops Minecraft server", brief="Stops Minecraft server",
-                pass_context=True)
+@client.command(name="stop", description="Stops Minecraft server", brief="Stops Minecraft server", pass_context=True)
 async def stopserver(ctx):
-    params = {"signal": "stop"}
-    response = requests.post(post_url, json=params, headers=header)
-    print(response.json())
+    response = panel_client.client.send_power_action(srv_id, 'stop')
     if response.status_code == 204:
-        await ctx.send("Stopping the server, " + ctx.author.mention + ", hope you had a great time!")
-    else:
-        await ctx.send("Hmmmm. There seems to be an error, " + ctx.author.mention + ". Try again later?")
+        await ctx.send("Stopping the server, "+ ctx.author.mention + ", hope you had a great time!")
 
-
-@client.command(name="status", description="Check if server is running", brief="Check if server is running",
-                pass_context=True)
+@client.command(name="status", description="Check if server is running", brief="Check if server is running", pass_context=True)
 async def serverstatus(ctx):
-    response = requests.get(get_url, headers=header)
-    res = response.json()
-    print(res)
-    if res["attributes"]["state"] == "on":
-        await ctx.send("Server is already on, " + ctx.author.mention + ", get on there!")
-    elif res["attributes"]["state"] == "off":
-        await ctx.send("Welp, server's off " + ctx.author.mention + ". Start it using the startserver command!")
+    res = panel_client.client.get_server_utilization('61955f87')
+    if res['state'] == "on":
+        await ctx.send("Server is already on, "+ ctx.author.mention + ", get on there!")
+    elif res['state'] == "off":
+        await ctx.send("Welp, server's off "+ ctx.author.mention + ". Start it using the start command!")
     else:
-        await ctx.send("Hmmmm. There seems to be an error, " + ctx.author.mention + ". Try again later?")
-
+        await ctx.send("Hmmmm. The server is either starting or stopping right now, "+ ctx.author.mention)
 
 @client.command(description="Show the server address", brief="Show server address", pass_context=True)
 async def address(ctx):
-    await ctx.send("Hey " + ctx.author.mention + ", use " + os.environ['SERVER_ADDRESS'] + " to connect to the server!")
-
+    await ctx.send("Hey "+ ctx.author.mention + ", use de4.hostserver.cc:25766 to connect to the server!")
 
 client.run(TOKEN)
