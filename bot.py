@@ -38,4 +38,9 @@ async def serverstatus(ctx):
 async def address(ctx):
     await ctx.send("Hey "+ ctx.author.mention + ", use " + os.environ['SERVER_ADDRESS'] + " to connect to the server!")
 
+@client.event
+async def on_ready():
+    await client.change_presence(game=Game(name="Minecraft")
+
+                                 
 client.run(TOKEN)
