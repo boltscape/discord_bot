@@ -3,12 +3,12 @@ import os
 import requests
 
 BOT_PREFIX = '!'
-TOKEN = os.environ['bot_token']
-post_url = 'https://panel.freemc.host/api/client/servers/'+ os.environ['server_id'] +'/power'
-get_url = 'https://panel.freemc.host/api/client/servers/'+ os.environ['server_id'] +'/utilization'
+TOKEN = os.environ['BOT_TOKEN']
+post_url = 'https://panel.freemc.host/api/client/servers/'+ os.environ['SERVER_ID'] +'/power'
+get_url = 'https://panel.freemc.host/api/client/servers/'+ os.environ['SERVER_ID'] +'/utilization'
 header = {"Accept": "Application/vnd.pterodactyl.v1+json",
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + Bearer os.environ['ptero_token']
+          "Authorization": "Bearer " + Bearer os.environ['PTERO_TOKEN']
           }
 
 client = Bot(command_prefix=BOT_PREFIX)
@@ -51,7 +51,7 @@ async def serverstatus(ctx):
 
 @client.command(description="Show the server address", brief="Show server address", pass_context=True)
 async def address(ctx):
-    await ctx.send("Hey " + ctx.author.mention + ", use " + os.environ['server_address'] + " to connect to the server!")
+    await ctx.send("Hey " + ctx.author.mention + ", use " + os.environ['SERVER_ADDRESS'] + " to connect to the server!")
 
 
 client.run(TOKEN)
