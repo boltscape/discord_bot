@@ -1,4 +1,4 @@
-Server Bot for Pterodactyl based hosts
+Discord Bot for Pterodactyl based hosts
 
 This bot will help you manage your Pterodactyl host servers.
 
