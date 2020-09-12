@@ -41,4 +41,9 @@ async def serverstatus(ctx):
         await ctx.send("Welp, server's off "+ ctx.author.mention + ". Start it using the startserver command!")
     else:
         await ctx.send("Hmmmm. There seems to be an error, "+ ctx.author.mention + ". Try again later?")
+
+@client.command(description="Show the server address", brief="Show server address", pass_context=True)
+async def address(ctx):
+    await ctx.send("Hey "+ ctx.author.mention + ", use <your_server_address> to connect to the server!")
+
 client.run(TOKEN)
