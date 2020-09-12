@@ -1,8 +1,8 @@
-#Server Bot for FreeMC Host
+Server Bot for FreeMC Host
 
 This bot will help you manage your FreeMC Host server.
 
-###Setting up the bot
+Setting up the bot
 
 You will need to change 4 things in the code to set up the bot for your needs:
 1. Your Discord bot token.
