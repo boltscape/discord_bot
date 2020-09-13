@@ -40,6 +40,10 @@ async def serverstatus(ctx):
     else:
         await ctx.send("Hmmmm. The server is either starting or stopping right now, "+ ctx.author.mention)
 
+@client.command(name="thanks", description="Your way to thank the creeper xD", brief="Give thanks", pass_context=True)
+async def thanks(ctx):
+    await ctx.send("You're welcome, " ctx.author.mention + " :)")
+    
 @client.command(description="Show the server address", brief="Show server address", pass_context=True)
 async def address(ctx):
     await ctx.send("Hey "+ ctx.author.mention + ", use " + os.environ['SERVER_ADDRESS'] + " to connect to the server!")
