@@ -42,7 +42,7 @@ async def serverstatus(ctx):
 
 @client.command(name="thanks", description="Your way to thank the creeper xD", brief="Give thanks", pass_context=True)
 async def thanks(ctx):
-    await ctx.send("You're welcome, " ctx.author.mention + " :smile:")
+    await ctx.send("You're welcome, " + ctx.author.mention + " :smile:")
     
 @client.command(description="Show the server address", brief="Show server address", pass_context=True)
 async def address(ctx):
