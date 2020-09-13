@@ -32,7 +32,7 @@ async def restartserver(ctx):
 
 @client.command(name="status", description="Check if server is running", brief="Check if server is running", pass_context=True)
 async def serverstatus(ctx):
-    res = panel_client.client.get_server_utilization('61955f87')
+    res = panel_client.client.get_server_utilization(srv_id)
     if res['state'] == "on":
         await ctx.send("Server is already on, "+ ctx.author.mention + ", get on there!")
     elif res['state'] == "off":
