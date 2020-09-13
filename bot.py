@@ -12,17 +12,23 @@ srv_id = os.environ['SERVER_ID']
 client = Bot(command_prefix=BOT_PREFIX)
 panel_client = PterodactylClient('https://panel.gamehosting.gg', os.environ['PTERO_TOKEN'])
 
-@client.command(name="start", description="Starts Minecraft server", brief="Starts Minecraft server", pass_context=True)
+@client.command(name="start", description="Starts the Minecraft server", brief="Starts server", pass_context=True)
 async def startserver(ctx):
     response = panel_client.client.send_power_action(srv_id, 'start')
     if response.status_code == 204:
         await ctx.send("Starting the server, "+ ctx.author.mention + ", enjoy!")
 
-@client.command(name="stop", description="Stops Minecraft server", brief="Stops Minecraft server", pass_context=True)
+@client.command(name="stop", description="Stops the Minecraft server", brief="Stops server", pass_context=True)
 async def stopserver(ctx):
     response = panel_client.client.send_power_action(srv_id, 'stop')
     if response.status_code == 204:
         await ctx.send("Stopping the server, "+ ctx.author.mention + ", hope you had a great time!")
+
+@client.command(name="restart", description="Restart the Minecraft server", brief="Restart server", pass_context=True)
+async def restartserver(ctx):
+    response = panel_client.client.send_power_action(srv_id, 'restart')
+    if response.status_code == 204:
+        await ctx.send("Restarting the server, "+ ctx.author.mention + ", give me a minute!")
 
 @client.command(name="status", description="Check if server is running", brief="Check if server is running", pass_context=True)
 async def serverstatus(ctx):
