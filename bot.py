@@ -10,7 +10,7 @@ TOKEN = os.environ['BOT_TOKEN']
 srv_id = os.environ['SERVER_ID']
 
 client = Bot(command_prefix=BOT_PREFIX)
-panel_client = PterodactylClient('https://panel.gamehosting.gg', os.environ['PTERO_TOKEN'])
+panel_client = PterodactylClient('https://panel.freemc.host', os.environ['PTERO_TOKEN'])
 
 @client.command(name="start", description="Starts the Minecraft server", brief="Starts server", pass_context=True)
 async def startserver(ctx):
