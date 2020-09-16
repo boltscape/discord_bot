@@ -39,6 +39,7 @@ async def restartserver(ctx):
 @client.command(name="status", description="Check if server is running", brief="Check if server is running", pass_context=True)
 async def serverstatus(ctx):
     response = panel_client.client.get_server_utilization(srv_id)
+    print(response)
     if response.status_code == 500:
         await ctx.send("Shit. There was a server error, " + ctx.author.mention + ". Try again later?")
     elif response['state'] == "on":
