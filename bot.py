@@ -17,23 +17,31 @@ async def startserver(ctx):
     response = panel_client.client.send_power_action(srv_id, 'start')
     if response.status_code == 204:
         await ctx.send("Starting the server, "+ ctx.author.mention + ", enjoy!")
+    elif response.status_code == 500:
+        await ctx.send("Shit. There was a server error, " ctx.author.mention + ". Try again later?")
 
 @client.command(name="stop", description="Stops the Minecraft server", brief="Stops server", pass_context=True)
 async def stopserver(ctx):
     response = panel_client.client.send_power_action(srv_id, 'stop')
     if response.status_code == 204:
         await ctx.send("Stopping the server, "+ ctx.author.mention + ", hope you had a great time!")
+    elif response.status_code == 500:
+        await ctx.send("Shit. There was a server error, " ctx.author.mention + ". Try again later?")
 
 @client.command(name="restart", description="Restart the Minecraft server", brief="Restart server", pass_context=True)
 async def restartserver(ctx):
     response = panel_client.client.send_power_action(srv_id, 'restart')
     if response.status_code == 204:
         await ctx.send("Restarting the server, "+ ctx.author.mention + ", give me a minute!")
-
+    elif response.status_code == 500:
+        await ctx.send("Shit. There was a server error, " ctx.author.mention + ". Try again later?")
+        
 @client.command(name="status", description="Check if server is running", brief="Check if server is running", pass_context=True)
 async def serverstatus(ctx):
     res = panel_client.client.get_server_utilization(srv_id)
-    if res['state'] == "on":
+    if response.status_code == 500:
+        await ctx.send("Shit. There was a server error, " ctx.author.mention + ". Try again later?")
+    elif res['state'] == "on":
         await ctx.send("Server is already on, "+ ctx.author.mention + ", get on there!")
     elif res['state'] == "off":
         await ctx.send("Welp, server's off "+ ctx.author.mention + ". Start it using the start command!")
