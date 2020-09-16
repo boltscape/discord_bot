@@ -14,28 +14,31 @@ panel_client = PterodactylClient('https://panel.freemc.host', os.environ['PTERO_
 
 @client.command(name="start", description="Starts the Minecraft server", brief="Starts server", pass_context=True)
 async def startserver(ctx):
-    response = panel_client.client.send_power_action(srv_id, 'start')
-    if response.status_code == 204:
-        await ctx.send("Starting the server, "+ ctx.author.mention + ", enjoy!")
-    elif response.status_code == 500:
+    try:
+        response = panel_client.client.send_power_action(srv_id, 'start')
+        if response.status_code == 204:
+            await ctx.send("Starting the server, "+ ctx.author.mention + ", enjoy!")
+    except requests.exceptions.HTTPError:
         await ctx.send("Shit. There was a server error, " + ctx.author.mention + ". Try again later?")
 
 @client.command(name="stop", description="Stops the Minecraft server", brief="Stops server", pass_context=True)
 async def stopserver(ctx):
-    response = panel_client.client.send_power_action(srv_id, 'stop')
-    if response.status_code == 204:
-        await ctx.send("Stopping the server, "+ ctx.author.mention + ", hope you had a great time!")
-    elif response.status_code == 500:
+    try:
+        response = panel_client.client.send_power_action(srv_id, 'stop')
+        if response.status_code == 204:
+            await ctx.send("Stopping the server, "+ ctx.author.mention + ", hope you had a great time!")
+    except requests.exceptions.HTTPError:
         await ctx.send("Shit. There was a server error, " + ctx.author.mention + ". Try again later?")
 
 @client.command(name="restart", description="Restart the Minecraft server", brief="Restart server", pass_context=True)
 async def restartserver(ctx):
-    response = panel_client.client.send_power_action(srv_id, 'restart')
-    if response.status_code == 204:
-        await ctx.send("Restarting the server, "+ ctx.author.mention + ", give me a minute!")
-    elif response.status_code == 500:
+    try:
+        response = panel_client.client.send_power_action(srv_id, 'restart')
+        if response.status_code == 204:
+            await ctx.send("Restarting the server, "+ ctx.author.mention + ", give me a minute!")
+    except requests.exceptions.HTTPError:
         await ctx.send("Shit. There was a server error, " + ctx.author.mention + ". Try again later?")
-        
+   
 @client.command(name="status", description="Check if server is running", brief="Check if server is running", pass_context=True)
 async def serverstatus(ctx):
     try:
