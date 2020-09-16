@@ -41,9 +41,9 @@ async def serverstatus(ctx):
     response = panel_client.client.get_server_utilization(srv_id)
     if response.status_code == 500:
         await ctx.send("Shit. There was a server error, " + ctx.author.mention + ". Try again later?")
-    elif res['state'] == "on":
+    elif response['state'] == "on":
         await ctx.send("Server is already on, "+ ctx.author.mention + ", get on there!")
-    elif res['state'] == "off":
+    elif response['state'] == "off":
         await ctx.send("Welp, server's off "+ ctx.author.mention + ". Start it using the start command!")
     else:
         await ctx.send("Hmmmm. The server is either starting or stopping right now, "+ ctx.author.mention)
