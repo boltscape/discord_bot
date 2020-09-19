@@ -3,6 +3,7 @@ from pydactyl import PterodactylClient
 from discord import Game
 import requests
 import os
+from time import sleep
 
 
 BOT_PREFIX = ('!')
@@ -59,6 +60,17 @@ async def thanks(ctx):
 @client.command(description="Show the server address", brief="Show server address", pass_context=True)
 async def address(ctx):
     await ctx.send("Hey "+ ctx.author.mention + ", use " + os.environ['SERVER_ADDRESS'] + " to connect to the server!")
+
+@client.command(name="ping", description= "Pings the server every 1 minute and sends a message if it's back", brief="Tells when server comes back on")
+async def ping(ctx):
+    await ctx.send("Running the ping process. PLEASE DO NOT RUN THIS COMMAND AGAIN TILL SERVER IS BACK UP")
+    while(1):
+        try:
+            res = panel_client.client.get_server_utilization("40fa3547")
+            break
+        except requests.exceptions.HTTPError:
+            sleep(60)
+    await ctx.send("The server is up, @everyone!")
 
 @client.event
 async def on_ready():
