@@ -61,6 +61,10 @@ async def thanks(ctx):
 async def address(ctx):
     await ctx.send("Hey "+ ctx.author.mention + ", use " + os.environ['SERVER_ADDRESS'] + " to connect to the server!")
 
+@client.command(description="Say your goodbyes", brief="Adios amigos :)", pass_context=True)
+async def goodbye(ctx):
+    await ctx.send("Goodbye guys, I'll miss you :( ")
+
 @client.command(name="ping", description= "Pings the server every 1 minute and sends a message if it's back", brief="Tells when server comes back on")
 async def ping(ctx):
     await ctx.send("Running the ping process. PLEASE DO NOT RUN THIS COMMAND AGAIN TILL SERVER IS BACK UP")
